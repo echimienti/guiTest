@@ -4,8 +4,17 @@ Funda quick search component test with python selenium
 Installation
 ------------
 Installation is as simple as running a single shell script. The script will then take care of installing `virtualenv <https://virtualenv.pypa.io/en/latest/>`_, creating the virtualenv and installing all necessary dependencies.
-To bootstrap the test environment execute::
+For preparation of the system follow next steps::
 
+In case of linux 32 bit system::
+    ~$ sudo /bin/cp geckodriver_linux_32bit /usr/local/bin
+
+In case of linux 64 bit system::
+    ~$ sudo /bin/cp geckodriver_linux_64bit /usr/local/bin
+
+In any other case see: https://github.com/mozilla/geckodriver/releases for the geckodriver for you system and copy that one to /usr/local/bin
+
+To bootstrap the test environment execute::
     ~$ ./setup_virtualenv.sh
 
 Running tests
