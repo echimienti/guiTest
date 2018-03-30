@@ -23,22 +23,22 @@ class TestFundaSimpleSearch():
         assert int(searched_results) >= self.expected_results
 
     def enter_national_location(self, browser, location):
-            location_input = browser.get_national_location()
+        location_input = browser.get_national_location()
 
-            # enter part of the location
-            location_input.click()
+        # enter part of the location
+        location_input.click()
 
-            for char_l in list(location):
-                location_input.send_keys(char_l)
-                time.sleep(0.3)
+        for char_l in list(location):
+            location_input.send_keys(char_l)
+            time.sleep(0.3)
 
-            # click on the first match of autocomplete
-            autocomplete_list0 = browser.wait_autocomplete('0')
-            autocomplete_list0.click()
+        # click on the first match of autocomplete
+        autocomplete_list0 = browser.wait_autocomplete('0')
+        autocomplete_list0.click()
 
     def enter_european_location(self, browser, location):
-            country_location = browser.europa_location(location)
-            country_location.click()
+        country_location = browser.europa_location(location)
+        country_location.click()
 
     @pytest.mark.parametrize('block_navigation, xpath_extension, location, title',
         [('koop', 'li[1]/a', 'Hui', 'huizen en appartementen te koop in Nederland'),
