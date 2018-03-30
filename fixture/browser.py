@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 __author__ = "Enzo Chimienti"
-
 import time
 
 from selenium import webdriver
@@ -16,24 +15,30 @@ from fixture.locator import FundaXpathLocatator
 
 class SeleniumBrowser(object):
 
-    def __init__(self, url="https://www.funda.nl", browser="firefox", display="off", size=(800, 600), visible=0):
+    def __init__(self):
+        self.driver = None
+        self.locator = FundaXpathLocatator()
+
+    def start(self, url="https://www.funda.nl", browser="firefox", display="off", size=(800, 600), visible=0, chrome_path="/usr/lib/chromium-browser/chromedriver"):
+        """Start browser"""
+        self.browser = browser
+        self.url = url
+
+        if browser == "firefox":
+            self.driver = webdriver.Firefox()
+        elif browser == "chrome" or browser == "chromium":
+            self.driver = webdriver.Chrome(chrome_path)
+
+        self.driver.get(self.url)
+
         if display == "on":
             display = Display(visible=visible, size=size)
             display.start()
 
-        self.browser = browser
-        self.url = url
-        self.driver = None
-        self.locator = FundaXpathLocatator()
-
-    def start(self):
-        """Start browser"""
-        self.driver = webdriver.Firefox()
-        self.driver.get(self.url)
-
     def stop(self):
         """Stop and close browser"""
-        self.driver.close()
+        if self.driver:
+            self.driver.close()
 
     def click_block_navigation(self, xpath_extension):
         self.driver.find_element_by_xpath(self.locator.block_navigation + xpath_extension).click()
